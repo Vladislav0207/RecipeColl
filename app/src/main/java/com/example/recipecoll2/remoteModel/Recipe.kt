@@ -11,21 +11,10 @@ data class Recipes(
 
 @Entity(tableName = "recipe")
 data class Recipe(
-//    val extendedIngredients: List<ExtendedIngredients>?,
-    @PrimaryKey val id: Int,
-    val title: String,
-    val readyInMinutes: Int,
-    val servings:Int,
-    val image: String,
-//    val dishTypes: List<String>?,
+    @PrimaryKey val id: Int = 0,
+    val title: String = "null",
+    val readyInMinutes: Int = 0,
+    val servings:Int = 0,
+    val image: String = "null",
     val instructions: String
-)
-
-
-data class ExtendedIngredients(
-    val id: Int,
-    val image:String,
-    val nameClean: String,
-    val amount: String,
-    val unit: String
 )

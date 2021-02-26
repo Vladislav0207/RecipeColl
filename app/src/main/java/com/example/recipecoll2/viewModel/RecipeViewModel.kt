@@ -19,27 +19,27 @@ class RecipeViewModel (val repository: Repository) : ViewModel() {
             val data = repository.getData()
             recipeLive.postValue(data)
         }
+   }
 
-    }
-    fun saveData(){
-        scope.launch {
-            repository.saveData(recipeLive.value!!)
-        }
-    }
-
-    fun saveOneRecipe (recipe: Recipe){
-        scope.launch {
-            repository.saveOneRecipe(recipe)
-            recipeLive.value!!.add(recipe)
-        }
-    }
-
-    fun getOnePost(id :Int){
-        scope.launch {
-            val recipe = repository.getOneRecipe(id)
-            val recipeList = mutableListOf<Recipe>()
-            recipeList.add(recipe)
-            recipeLive.postValue(recipeList)
-        }
-    }
+//    fun saveData(){
+//        scope.launch {
+//            repository.saveData(recipeLive.value!!)
+//        }
+//    }
+//
+//    fun saveOneRecipe (recipe: Recipe){
+//        scope.launch {
+//            repository.saveOneRecipe(recipe)
+//            recipeLive.value!!.add(recipe)
+//        }
+//    }
+//
+//    fun getOnePost(id :Int){
+//        scope.launch {
+//            val recipe = repository.getOneRecipe(id)
+//            val recipeList = mutableListOf<Recipe>()
+//            recipeList.add(recipe)
+//            recipeLive.postValue(recipeList)
+//        }
+//    }
 }

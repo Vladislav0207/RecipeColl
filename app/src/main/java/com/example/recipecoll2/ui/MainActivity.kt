@@ -33,8 +33,8 @@ class MainActivity : AppCompatActivity() {
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         val remoteModel = RemoteModel()
-        val localModel= LocalModel(this)
-        val repository = Repository(remoteModel, localModel)
+       // val localModel= LocalModel(this)
+        val repository = Repository(remoteModel)
         val factory = RecipeViewModelFactory(repository)
         viewModel = ViewModelProvider(this, factory).get(RecipeViewModel::class.java)
 
