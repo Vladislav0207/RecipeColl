@@ -1,8 +1,8 @@
-package com.example.recipecoll2.remoteModel
+package com.example.recipecoll2.localModel
 
 import androidx.room.Entity
 
-@Entity(tableName = "Ingredients")
+@Entity(tableName = "ingredients")
 data class Ingredients(
     val ingredients : MutableList<Ingredient>
 )

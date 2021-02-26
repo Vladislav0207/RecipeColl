@@ -2,7 +2,7 @@ package com.example.recipecoll2.viewModel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.recipecoll2.remoteModel.Recipe
+import com.example.recipecoll2.localModel.Recipe
 import com.example.recipecoll2.repository.Repository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

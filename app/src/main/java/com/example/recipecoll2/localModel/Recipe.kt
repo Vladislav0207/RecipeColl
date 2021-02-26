@@ -1,4 +1,4 @@
-package com.example.recipecoll2.remoteModel
+package com.example.recipecoll2.localModel
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

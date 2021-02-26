@@ -2,27 +2,31 @@ package com.example.recipecoll2.localModel
 
 import android.content.Context
 import androidx.room.Room
-import com.example.recipecoll2.remoteModel.Recipe
 
 class LocalModel (context: Context) {
-    val database : RecipeDatabase = Room.databaseBuilder(context,
+    val recipeDatabase : RecipeDatabase = Room.databaseBuilder(context,
         RecipeDatabase::class.java,
         "recipe_db")
         .build()
 
+    val ingredientDatabase : IngredientDatabase = Room.databaseBuilder(context,
+        IngredientDatabase::class.java,
+        "ingredient_db")
+        .build()
+
     suspend fun insertRecipes(recipes : MutableList<Recipe>){
-        database.recipeDao().insertRecipe(recipes)
+        recipeDatabase.recipeDao().insertRecipe(recipes)
     }
 
     suspend fun insertOneRecipe(recipe: Recipe){
-        database.recipeDao().insertOneRecipe(recipe)
+        recipeDatabase.recipeDao().insertOneRecipe(recipe)
     }
 
     suspend fun getAllRecipes(): MutableList<Recipe>{
-        return database.recipeDao().getAllRecipes()
+        return  recipeDatabase.recipeDao().getAllRecipes()
     }
 
-    suspend fun getOneRecipe(id: Int): Recipe{
-        return database.recipeDao().getOneRecipe(id)
+    suspend fun getOneRecipe(id: Int): Recipe {
+        return  recipeDatabase.recipeDao().getOneRecipe(id)
     }
 }

@@ -1,18 +1,31 @@
 package com.example.recipecoll2.remoteModel
 
-import android.util.Log
 import java.lang.Exception
 
 class RemoteModel() {
     private val apiService = ApiService.create()
-    suspend fun getRemoteData() : MutableList<Recipe>{
+    suspend fun getRemoteData() : MutableList<AllRecipe>{
         return try {
-            val  recipesList = apiService.getRecipes(KEY, HOST,2).recipes
-            recipesList
+            lateinit var allRecipesList : MutableList<AllRecipe>
+
+            val  recipesList = apiService.getRecipes(KEY, HOST, NUMBER).recipes
+            for (num in 0 until NUMBER){
+                val recipe = AllRecipe(
+                    recipesList[num].id,
+                    recipesList[num].title,
+                    recipesList[num].readyInMinutes,
+                    recipesList[num].servings,
+                    recipesList[num].image,
+                    recipesList[num].instructions,
+                    apiService.getRecipeIngredients(KEY, HOST,recipesList[num].id).ingredients
+                )
+                allRecipesList.add(num,recipe)
+
+            }
+          allRecipesList
         }
         catch (e : Exception){
-            Log.d("!!!!","RemoteData exeption")
-            mutableListOf<Recipe>()
+            mutableListOf()
         }
     }
 }

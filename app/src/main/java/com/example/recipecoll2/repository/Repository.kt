@@ -1,7 +1,6 @@
 package com.example.recipecoll2.repository
 
-import com.example.recipecoll2.localModel.LocalModel
-import com.example.recipecoll2.remoteModel.Recipe
+import com.example.recipecoll2.localModel.Recipe
 import com.example.recipecoll2.remoteModel.RemoteModel
 
 class Repository (

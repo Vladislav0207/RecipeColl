@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.recipecoll2.R
-import com.example.recipecoll2.remoteModel.Recipe
+import com.example.recipecoll2.localModel.Recipe
 
 class RecipeAdapter (val recipes: MutableList<Recipe>, val fragment: MainFragment):
     RecyclerView.Adapter<RecipeAdapter.RecipeViewHolder>() {

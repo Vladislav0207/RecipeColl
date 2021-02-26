@@ -12,7 +12,7 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.recipecoll2.R
-import com.example.recipecoll2.remoteModel.Recipe
+import com.example.recipecoll2.localModel.Recipe
 import com.example.recipecoll2.viewModel.RecipeViewModel
 import kotlinx.android.synthetic.main.fragment_main.*
 
