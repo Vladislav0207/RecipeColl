@@ -1,6 +1,6 @@
 package com.example.recipecoll2.remoteModel
 
-import com.example.recipecoll2.localModel.Ingredients
+import com.example.recipecoll2.localModel.Ingredient
 import com.example.recipecoll2.localModel.Recipes
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -30,7 +30,7 @@ interface ApiService {
     suspend fun getRecipeIngredients(
         @Header("x-rapidapi-key") key: String,
         @Header("x-rapidapi-host") host: String,
-        @Path("recipeId") recipeId : Int) : Ingredients
+        @Path("recipeId") recipeId : Int) : MutableList<Ingredient>
 
 
 

@@ -16,5 +16,9 @@ data class Recipe(
     val readyInMinutes: Int = 0,
     val servings:Int = 0,
     val image: String = "null",
-    val instructions: String
+    val instructions: String,
+    val idIngredients: IdIngredients
+)
+data class IdIngredients(
+    val IngredientsId : MutableList<String>
 )

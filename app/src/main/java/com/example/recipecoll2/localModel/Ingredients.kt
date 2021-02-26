@@ -1,13 +1,11 @@
 package com.example.recipecoll2.localModel
 
 import androidx.room.Entity
+import androidx.room.PrimaryKey
 
 @Entity(tableName = "ingredients")
-data class Ingredients(
-    val ingredients : MutableList<Ingredient>
-)
 data class Ingredient(
-    val id: Int = 0,
+    @PrimaryKey val id: Int = 0,
     val image:String = "null",
     val nameClean: String = "null",
     val amount: String = "null",

@@ -29,4 +29,6 @@ class LocalModel (context: Context) {
     suspend fun getOneRecipe(id: Int): Recipe {
         return  recipeDatabase.recipeDao().getOneRecipe(id)
     }
+
+
 }
