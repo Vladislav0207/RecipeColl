@@ -6,10 +6,9 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.recipecoll2.R
-import com.example.recipecoll2.localModel.Recipe
-import com.example.recipecoll2.remoteModel.AllRecipe
+import com.example.recipecoll2.remoteModel.Recipe
 
-class RecipeAdapter (val recipes: MutableList<AllRecipe>, val fragment: MainFragment):
+class RecipeAdapter (val recipes: MutableList<Recipe>, val fragment: MainFragment):
     RecyclerView.Adapter<RecipeAdapter.RecipeViewHolder>() {
 
     class RecipeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){

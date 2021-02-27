@@ -1,7 +1,5 @@
 package com.example.recipecoll2.remoteModel
 
-import com.example.recipecoll2.localModel.Ingredient
-import com.example.recipecoll2.localModel.Recipes
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -26,11 +24,6 @@ interface ApiService {
         @Query("number") number: Int
     ): Recipes
 
-    @GET("{recipeId}/ingredientWidget.json")
-    suspend fun getRecipeIngredients(
-        @Header("x-rapidapi-key") key: String,
-        @Header("x-rapidapi-host") host: String,
-        @Path("recipeId") recipeId : Int) : MutableList<Ingredient>
 
 
 

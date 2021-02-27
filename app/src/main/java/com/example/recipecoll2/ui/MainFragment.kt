@@ -12,14 +12,14 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.recipecoll2.R
-import com.example.recipecoll2.localModel.Recipe
+import com.example.recipecoll2.localModel.LocalRecipe
 import com.example.recipecoll2.viewModel.RecipeViewModel
 import kotlinx.android.synthetic.main.fragment_main.*
 
 class MainFragment : Fragment() {
     lateinit var navController: NavController
     lateinit var viewModel: RecipeViewModel
-    val recipes = mutableListOf<Recipe>()
+    val recipes = mutableListOf<LocalRecipe>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,7 +40,7 @@ class MainFragment : Fragment() {
         navController = findNavController()
 
         viewModel.getData()
-        viewModel.recipeLive.observe(activity as MainActivity, Observer {
+        viewModel.localRecipeLive.observe(activity as MainActivity, Observer {
             Log.d("!!!",it.toString())
             recipes.clear()
             recipes.addAll(it)

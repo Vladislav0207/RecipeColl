@@ -14,19 +14,19 @@ class LocalModel (context: Context) {
         "ingredient_db")
         .build()
 
-    suspend fun insertRecipes(recipes : MutableList<Recipe>){
-        recipeDatabase.recipeDao().insertRecipe(recipes)
+    suspend fun insertRecipes(localRecipes : MutableList<LocalRecipe>){
+        recipeDatabase.recipeDao().insertRecipe(localRecipes)
     }
 
-    suspend fun insertOneRecipe(recipe: Recipe){
-        recipeDatabase.recipeDao().insertOneRecipe(recipe)
+    suspend fun insertOneRecipe(localRecipe: LocalRecipe){
+        recipeDatabase.recipeDao().insertOneRecipe(localRecipe)
     }
 
-    suspend fun getAllRecipes(): MutableList<Recipe>{
+    suspend fun getAllRecipes(): MutableList<LocalRecipe>{
         return  recipeDatabase.recipeDao().getAllRecipes()
     }
 
-    suspend fun getOneRecipe(id: Int): Recipe {
+    suspend fun getOneRecipe(id: Int): LocalRecipe {
         return  recipeDatabase.recipeDao().getOneRecipe(id)
     }
 

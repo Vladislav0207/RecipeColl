@@ -7,7 +7,7 @@ import androidx.room.Query
 @Dao
 interface IngredientDao {
     @Insert
-    suspend fun insertIngredients(ingredient  : MutableList<Ingredient>)
+    suspend fun insertIngredients(localIngredient  : MutableList<LocalIngredient>)
     @Query("SELECT * FROM ingredients")
-    suspend fun getAllIngredients():MutableList<Ingredient>
+    suspend fun getAllIngredients():MutableList<LocalIngredient>
 }

@@ -8,13 +8,13 @@ import androidx.room.Query
 interface RecipeDao {
 
     @Insert
-    suspend fun insertRecipe(recipe  : MutableList<Recipe>)
+    suspend fun insertRecipe(localRecipe  : MutableList<LocalRecipe>)
     @Query("SELECT * FROM recipe")
-    suspend fun getAllRecipes():MutableList<Recipe>
+    suspend fun getAllRecipes():MutableList<LocalRecipe>
     @Insert
-    suspend fun insertOneRecipe(Recipe: Recipe)
+    suspend fun insertOneRecipe(LocalRecipe: LocalRecipe)
     @Query("SELECT * FROM recipe WHERE id = :id")
-    suspend fun getOneRecipe(id: Int) : Recipe
+    suspend fun getOneRecipe(id: Int) : LocalRecipe
 
 //    @Query("UPDATE recipe SET isFavorite = :isSelected WHERE id = :id")
 //    suspend fun updateOnePost(id:Int,isSelected:Int)

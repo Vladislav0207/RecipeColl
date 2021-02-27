@@ -4,21 +4,15 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 
-data class Recipes(
-    val recipes: MutableList<Recipe>
-)
 
 
 @Entity(tableName = "recipe")
-data class Recipe(
+data class LocalRecipe(
     @PrimaryKey val id: Int = 0,
     val title: String = "null",
     val readyInMinutes: Int = 0,
     val servings:Int = 0,
     val image: String = "null",
-    val instructions: String,
-    val idIngredients: IdIngredients
+    val instructions: String
 )
-data class IdIngredients(
-    val IngredientsId : MutableList<String>
-)
+
