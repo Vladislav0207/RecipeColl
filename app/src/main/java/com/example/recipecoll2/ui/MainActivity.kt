@@ -6,6 +6,7 @@ import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.lifecycle.ViewModelProvider
 import com.example.recipecoll2.R
+import com.example.recipecoll2.localModel.LocalModel
 import com.example.recipecoll2.remoteModel.RemoteModel
 import com.example.recipecoll2.repository.Repository
 import com.example.recipecoll2.viewModel.RecipeViewModel
@@ -32,12 +33,12 @@ class MainActivity : AppCompatActivity() {
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         val remoteModel = RemoteModel()
-       // val localModel= LocalModel(this)
-        val repository = Repository(remoteModel)
+        val localModel= LocalModel(this)
+        val repository = Repository(remoteModel,localModel)
         val factory = RecipeViewModelFactory(repository)
         viewModel = ViewModelProvider(this, factory).get(RecipeViewModel::class.java)
 
-        viewModel.localRecipeLive.value = mutableListOf()
+        viewModel.RecipeLive.value = mutableListOf()
 
     }
 

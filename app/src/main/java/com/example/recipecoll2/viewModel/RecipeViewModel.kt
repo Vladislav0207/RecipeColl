@@ -3,6 +3,7 @@ package com.example.recipecoll2.viewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.recipecoll2.localModel.LocalRecipe
+import com.example.recipecoll2.remoteModel.Recipe
 import com.example.recipecoll2.repository.Repository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -10,14 +11,14 @@ import kotlinx.coroutines.launch
 
 class RecipeViewModel (val repository: Repository) : ViewModel() {
     val scope = CoroutineScope(Dispatchers.IO)
-    val localRecipeLive : MutableLiveData<MutableList<LocalRecipe>> by lazy {
-        MutableLiveData<MutableList<LocalRecipe>>()
+    val RecipeLive : MutableLiveData<MutableList<Recipe>> by lazy {
+        MutableLiveData<MutableList<Recipe>>()
     }
 
     fun getData() {
         scope.launch {
             val data = repository.getData()
-            localRecipeLive.postValue(data)
+            RecipeLive.postValue(data)
         }
    }
 

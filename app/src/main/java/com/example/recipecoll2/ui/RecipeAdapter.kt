@@ -29,6 +29,13 @@ class RecipeAdapter (val recipes: MutableList<Recipe>, val fragment: MainFragmen
 
     override fun onBindViewHolder(holder: RecipeViewHolder, position: Int) {
         holder.name.text=recipes[position].title
-        holder.ingredients.text=recipes[position].ingredients.toString()
+        var body = ""
+        for (i in 0 until recipes[position].extendedIngredients.size)
+        {
+            if (i != 0) {
+                body += ", ${recipes[position].extendedIngredients[i]}"
+            }
+        }
+        holder.ingredients.text=recipes[position].extendedIngredients.toString()
     }
 }

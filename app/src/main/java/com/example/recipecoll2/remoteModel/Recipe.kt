@@ -8,7 +8,7 @@ data class Recipes(
 
 data class Recipe (
     var extendedIngredients: MutableList<Ingredient>,
-    val id: Int,
+    var id: Int,
     val title: String,
     val readyInMinutes: Int,
     val servings:Int,
