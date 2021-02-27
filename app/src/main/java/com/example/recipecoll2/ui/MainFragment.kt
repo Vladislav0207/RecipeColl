@@ -11,8 +11,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.recipecoll2.R
-import com.example.recipecoll2.localModel.LocalRecipe
 import com.example.recipecoll2.remoteModel.Recipe
 import com.example.recipecoll2.viewModel.RecipeViewModel
 import kotlinx.android.synthetic.main.fragment_main.*
@@ -24,6 +24,7 @@ class MainFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
 
     }
 
@@ -38,19 +39,24 @@ class MainFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         navController = findNavController()
 
-        viewModel.getData()
-        viewModel.RecipeLive.observe(activity as MainActivity, Observer {
-            Log.d("!!!",it.toString())
-            recipes.clear()
-            recipes.addAll(it)
-            mainRecyclerView.adapter?.notifyDataSetChanged()
-        })
 
         val adapter = RecipeAdapter(recipes,this)
         mainRecyclerView.adapter=adapter
-        mainRecyclerView.layoutManager= GridLayoutManager(activity,1)
+        mainRecyclerView.layoutManager= LinearLayoutManager(activity)
+
+
+        viewModel.getData()
+        viewModel.RecipeLive.observe(activity as MainActivity, Observer {
+            Log.d("!!!ff",it.toString())
+            recipes.clear()
+            recipes.addAll(it)
+            Log.d("!!!ff",it.toString())
+            mainRecyclerView.adapter?.notifyDataSetChanged()
+        })
+
     }
     }
 

@@ -42,4 +42,8 @@ class LocalModel (context: Context) {
     suspend fun getOneRecipeWithIngredients(id:Int): LocalRecipeWithIngredients{
         return recipeDatabase.recipeDao().getOneRecipeWithIngredients(id)
     }
+
+    suspend fun getAllIngredientsByRecipeId(recipeId:Int) : MutableList<LocalIngredient>{
+        return recipeDatabase.ingredientDao().getAllIngredientsByRecipeId(recipeId)
+    }
 }

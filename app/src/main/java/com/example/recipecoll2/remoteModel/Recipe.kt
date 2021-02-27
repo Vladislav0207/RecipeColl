@@ -21,5 +21,5 @@ data class Ingredient(
     val nameClean: String,
     val amount: String,
     val unit: String,
-    val recipeId: Int = 0
+    val recipeId: Int
 )

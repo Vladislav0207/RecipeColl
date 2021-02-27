@@ -5,14 +5,13 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Header
-import retrofit2.http.Path
 import retrofit2.http.Query
 import java.util.concurrent.TimeUnit
 
 const val BASE_URL = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/"
 const val KEY ="11ce03dfb8msh1b2f22da42cea2fp153590jsnaaae33be1acd"
 const val HOST ="spoonacular-recipe-food-nutrition-v1.p.rapidapi.com"
-const val NUMBER = 2
+const val NUMBER = 1
 
 
 interface ApiService {
