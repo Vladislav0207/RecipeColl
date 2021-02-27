@@ -42,7 +42,7 @@ class MainActivity : AppCompatActivity() {
         val repository = Repository(remoteModel,localModel)
         val factory = RecipeViewModelFactory(repository)
 
-        
+
 
 
 

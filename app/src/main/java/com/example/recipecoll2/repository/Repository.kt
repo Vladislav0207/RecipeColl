@@ -12,25 +12,27 @@ class Repository (
                   val localModel: LocalModel
 ) {
     suspend fun getData(): MutableList<Recipe> {
-        val recipeList = remoteModel.getRemoteDataRecipe()
+ //       val recipeList = remoteModel.getRemoteDataRecipe()
+        val recipeList = null
         return if (recipeList != null) {
 
-            Log.d("!!!loc1", recipeList.toString())
-            //add recipe and ingredients in database
-
-            Log.d("!!!size", recipeList.size.toString())
-            Log.d("!!!loc2", parseToLocal(recipeList).first.toString())
-            Log.d("!!!loc2", parseToLocal(recipeList).second.toString())
-                localModel.insertRecipes(parseToLocal(recipeList).first)
-                localModel.insertIngredients(parseToLocal(recipeList).second)
+//            Log.d("!!!loc1", recipeList.toString())
+//            //add recipe and ingredients in database
+//
+//            Log.d("!!!size", recipeList.size.toString())
+//            Log.d("!!!loc2", parseToLocal(recipeList).first.toString())
+//            Log.d("!!!loc2", parseToLocal(recipeList).second.toString())
+//                localModel.insertRecipes(parseToLocal(recipeList).first)
+//                localModel.insertIngredients(parseToLocal(recipeList).second)
 
 
            val localRecipe = localModel.getAllRecipes()
 
 
-            Log.d("!!!loc3",localRecipe.toString())
+//            Log.d("!!!loc3",localRecipe.toString())
+//
+//            Log.d("!!!loc4", parseLocalTo(localRecipe).toString())
 
-            Log.d("!!!loc4", parseLocalTo(localRecipe).toString())
             val recipe = parseLocalTo(localRecipe)
 
             recipe
