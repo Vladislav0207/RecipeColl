@@ -65,12 +65,12 @@ fun parseLocalTo( recipeWithIngredients: List<LocalRecipeWithIngredients>) : Mut
 
             listRecipe!!.add(Recipe(
              listIngredients,
-                recipeWithIngredients[i].LocalRecipe_id,
-                recipeWithIngredients[i].LocalRecipe_title,
-                recipeWithIngredients[i].LocalRecipe_readyInMinutes,
-                recipeWithIngredients[i].LocalRecipe_servings,
-                recipeWithIngredients[i].LocalRecipe_image,
-                recipeWithIngredients[i].LocalRecipe_instructions
+                recipeWithIngredients[i].localRecipe.id,
+                recipeWithIngredients[i].localRecipe.title,
+                recipeWithIngredients[i].localRecipe.readyInMinutes,
+                recipeWithIngredients[i].localRecipe.servings,
+                recipeWithIngredients[i].localRecipe.image,
+                recipeWithIngredients[i].localRecipe.instructions
             ))
         }
 
