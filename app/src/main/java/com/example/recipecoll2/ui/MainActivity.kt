@@ -2,7 +2,6 @@ package com.example.recipecoll2.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.lifecycle.ViewModelProvider
@@ -13,9 +12,6 @@ import com.example.recipecoll2.repository.Repository
 import com.example.recipecoll2.viewModel.RecipeViewModel
 import com.example.recipecoll2.viewModel.RecipeViewModelFactory
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
@@ -48,7 +44,7 @@ class MainActivity : AppCompatActivity() {
 
 
         viewModel = ViewModelProvider(this, factory).get(RecipeViewModel::class.java)
-        viewModel.RecipeLive.value = mutableListOf()
+        viewModel.recipeLive.value = mutableListOf()
 
     }
 

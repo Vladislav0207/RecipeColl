@@ -10,7 +10,6 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.recipecoll2.R
 import com.example.recipecoll2.remoteModel.Recipe
@@ -49,7 +48,7 @@ class MainFragment : Fragment() {
 
 
         viewModel.getData()
-        viewModel.RecipeLive.observe(activity as MainActivity, Observer {
+        viewModel.recipeLive.observe(activity as MainActivity, Observer {
             Log.d("!!!ff",it.toString())
             recipes.clear()
             recipes.addAll(it)
