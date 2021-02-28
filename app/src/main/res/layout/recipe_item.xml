@@ -3,47 +3,47 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="104dp"
+    android:background="@color/colorAccent">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/colorPrimary"
+        />
     <ImageView
         android:id="@+id/imageRecipe"
-        android:layout_width="150dp"
-        android:layout_height="164dp"
-        android:layout_marginTop="5dp"
+        android:layout_width="120dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="2dp"
         app:srcCompat="@drawable/ic_baseline_fastfood_24" />
     <TextView
         android:id="@+id/nameRecipe"
-        android:layout_width="wrap_content"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:textSize="26sp"
+        android:textSize="15sp"
         android:textStyle="bold"
         android:text="Nameg"
-        android:layout_margin="5dp"
+        android:layout_margin="1dp"
         android:layout_toEndOf="@id/imageRecipe"
         />
-
-    <TextView
-        android:id="@+id/ingredientsLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/nameRecipe"
-        android:layout_marginBottom="61dp"
-        android:layout_toEndOf="@id/imageRecipe"
-        android:text="@string/ingredients"
-        android:textSize="24sp"
-        android:textStyle="italic" />
 
     <TextView
         android:id="@+id/ingredientsRecipe"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/nameRecipe"
-        android:layout_marginBottom="61dp"
-        android:layout_toEndOf="@id/ingredientsLabel"
-        android:layout_marginStart="5dp"
+        android:layout_toEndOf="@id/imageRecipe"
+        android:layout_marginStart="1dp"
         android:text="ingr"
-        android:textSize="24sp"
+        android:textSize="13sp"
         android:textStyle="italic" />
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/colorPrimary"
+        android:layout_marginTop="102dp"
+        />
 
 </RelativeLayout>

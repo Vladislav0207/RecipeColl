@@ -33,9 +33,11 @@ class RecipeAdapter (val recipes: MutableList<Recipe>, val fragment: MainFragmen
         for (i in 0 until recipes[position].extendedIngredients.size)
         {
             if (i != 0) {
-                body += ", ${recipes[position].extendedIngredients[i]}"
+                body += ", ${recipes[position].extendedIngredients[i].nameClean}"
+            } else {
+                body +="Ingredients: ${recipes[position].extendedIngredients[i].nameClean}"
             }
         }
-        holder.ingredients.text=recipes[position].extendedIngredients.toString()
+        holder.ingredients.text=body
     }
 }
