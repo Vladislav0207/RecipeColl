@@ -9,6 +9,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class RecipeViewModel (val repository: Repository) : ViewModel() {
+
+    var selectRecipe : Recipe? = null
     val scope = CoroutineScope(Dispatchers.IO)
     val recipeLive : MutableLiveData<MutableList<Recipe>> by lazy {
         MutableLiveData<MutableList<Recipe>>()
@@ -34,7 +36,7 @@ class RecipeViewModel (val repository: Repository) : ViewModel() {
 //        }
 //    }
 //
-    fun getOneRecipe(id :Int){
+    fun getOneRecipe(id :Int) {
         scope.launch {
             val recipe = repository.getOneRecipe(id)
             val recipeList = mutableListOf<Recipe>()

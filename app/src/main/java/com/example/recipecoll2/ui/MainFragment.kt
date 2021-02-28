@@ -1,5 +1,6 @@
 package com.example.recipecoll2.ui
 
+import android.icu.text.Transliterator
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -32,7 +33,7 @@ class MainFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        viewModel= ViewModelProvider(activity as MainActivity).get(RecipeViewModel::class.java)
+        viewModel = ViewModelProvider(activity as MainActivity).get(RecipeViewModel::class.java)
         return inflater.inflate(R.layout.fragment_main, container, false)
     }
 
@@ -42,20 +43,26 @@ class MainFragment : Fragment() {
         navController = findNavController()
 
 
-        val adapter = RecipeAdapter(recipes,this)
-        mainRecyclerView.adapter=adapter
-        mainRecyclerView.layoutManager= LinearLayoutManager(activity)
+        val adapter = RecipeAdapter(recipes, this)
+        mainRecyclerView.adapter = adapter
+        mainRecyclerView.layoutManager = LinearLayoutManager(activity)
 
 
         viewModel.getData()
         viewModel.recipeLive.observe(activity as MainActivity, Observer {
-            Log.d("!!!ff",it.toString())
+            Log.d("!!!ff", it.toString())
             recipes.clear()
             recipes.addAll(it)
-            Log.d("!!!ff",it.toString())
+            Log.d("!!!ff", it.toString())
             mainRecyclerView.adapter?.notifyDataSetChanged()
         })
 
     }
+
+
+    fun selectRecipe(position: Int) {
+   viewModel.selectRecipe = recipes[position]
+        navController.navigate(R.id.informationFragment)
     }
+}
 

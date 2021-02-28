@@ -23,6 +23,10 @@ class RecipeAdapter (val recipes: MutableList<Recipe>, val fragment: MainFragmen
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.recipe_item,parent,false)
         val holder = RecipeViewHolder(itemView)
 
+        holder.itemView.setOnClickListener {
+            fragment.selectRecipe(holder.adapterPosition)
+        }
+
         return holder
     }
 

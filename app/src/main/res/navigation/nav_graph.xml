@@ -11,4 +11,10 @@
         android:name="com.example.recipecoll2.ui.MainFragment"
         android:label="fragment_main"
         tools:layout="@layout/fragment_main" />
+
+    <fragment
+        android:id="@+id/informationFragment"
+        android:name="com.example.recipecoll2.ui.InformationFragment"
+        android:label="fragment_information"
+        tools:layout="@layout/fragment_information" />
 </navigation>
