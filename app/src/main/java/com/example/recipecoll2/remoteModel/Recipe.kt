@@ -15,7 +15,8 @@ data class Recipe (
     val readyInMinutes: Int,
     val servings:Int,
     val image: String,
-    val instructions: String
+    val instructions: String,
+    var isFavorite : Int = 0
 )
 @Entity(tableName = "ingredient")
 data class Ingredient(

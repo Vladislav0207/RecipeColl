@@ -17,4 +17,10 @@
         android:name="com.example.recipecoll2.ui.InformationFragment"
         android:label="fragment_information"
         tools:layout="@layout/fragment_information" />
+
+    <fragment
+        android:id="@+id/favoriteFragment"
+        android:name="com.example.recipecoll2.ui.FavoriteFragment"
+        android:label="fragment_favorite"
+        tools:layout="@layout/fragment_favorite" />
 </navigation>

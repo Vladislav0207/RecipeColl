@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.example.recipecoll2.R
+import com.example.recipecoll2.remoteModel.Recipe
 import com.example.recipecoll2.viewModel.RecipeViewModel
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_information.*
@@ -18,7 +19,6 @@ import kotlinx.android.synthetic.main.fragment_main.*
 class InformationFragment : Fragment() {
     lateinit var navController: NavController
     lateinit var viewModel: RecipeViewModel
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,18 +34,18 @@ class InformationFragment : Fragment() {
 
         navController = findNavController()
 
-        Picasso.get().load(viewModel.selectRecipe!!.image).into(imageInf)
-        val time = "readyInMinutes: " + viewModel.selectRecipe!!.readyInMinutes.toString()
-        val servings = "servings: " + viewModel.selectRecipe!!.servings.toString()
-        nameInf.text=viewModel.selectRecipe!!.title
+        Picasso.get().load(viewModel.showRecipe!!.image).into(imageInf)
+        val time = "readyInMinutes: " + viewModel.showRecipe!!.readyInMinutes.toString()
+        val servings = "servings: " + viewModel.showRecipe!!.servings.toString()
+        nameInf.text=viewModel.showRecipe!!.title
         timeInf.text = time
         servingsInf.text =servings
         var ingredient = "Ingredients:\n"
-        viewModel.selectRecipe!!.extendedIngredients.forEach {
+        viewModel.showRecipe!!.extendedIngredients.forEach {
            ingredient += it.nameClean + ": " + it.amount + " " + it.unit + "\n"
         }
         ingredientsInf.text=ingredient
-        instructionInf.text = viewModel.selectRecipe!!.instructions.replace(
+        instructionInf.text = viewModel.showRecipe!!.instructions.replace(
             "</li><li>",
         "\n"
         ).replace(

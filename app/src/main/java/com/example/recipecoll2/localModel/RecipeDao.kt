@@ -1,9 +1,6 @@
 package com.example.recipecoll2.localModel
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.Query
-import androidx.room.Transaction
+import androidx.room.*
 import com.example.recipecoll2.remoteModel.Recipe
 
 @Dao
@@ -22,8 +19,11 @@ interface RecipeDao {
 //    @Query("SELECT * FROM recipe WHERE id = :id")
 //    suspend fun getOneRecipe(id: Int) : Recipe
 
+    @Query("UPDATE recipe SET isFavorite = :isSelected WHERE id = :id")
+    suspend fun updateRecipe(id:Int,isSelected:Int)
+
     @Transaction
-    @Query("select id, title, readyInMinutes, servings, image, instructions from recipe")
+    @Query("select id, title, readyInMinutes, servings, image, instructions, isFavorite from recipe")
     suspend fun getAllRecipe() : List<Recipe>
 
 

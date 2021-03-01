@@ -30,6 +30,16 @@
         android:layout_height="match_parent"
         android:scaleType="fitXY"
         app:srcCompat="@drawable/ic_baseline_fastfood_24" />
+
+    <ImageView
+        android:id="@+id/imageRecipeAddFavorite"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:scaleType="fitXY"
+        app:srcCompat="@drawable/ic_favorite_border_24"
+        android:layout_gravity="bottom"
+        android:layout_marginStart="95dp"
+        />
     ></androidx.cardview.widget.CardView>
 
 

@@ -1,32 +1,18 @@
 package com.example.recipecoll2.localModel
 
-import androidx.room.Embedded
 import androidx.room.Entity
+import androidx.room.Ignore
 import androidx.room.PrimaryKey
-import androidx.room.Relation
+import com.example.recipecoll2.remoteModel.Ingredient
 
 
 @Entity(tableName = "recipe")
-data class LocalRecipe(
+data class LocalRecipe (
     @PrimaryKey val id: Int,
     val title: String,
     val readyInMinutes: Int,
     val servings:Int,
     val image: String,
-    val instructions: String
-)
-class LocalRecipeWithIngredients(
-//    val LocalRecipe_id: Int,
-//    val LocalRecipe_title: String,
-//    val LocalRecipe_readyInMinutes: Int,
-//    val LocalRecipe_servings:Int,
-//    val LocalRecipe_image: String,
-//    val LocalRecipe_instructions: String,
-
-    @Embedded
-    val localRecipe : LocalRecipe,
-
-    @Relation (parentColumn = "id", entityColumn = "recipeId")
-    val localIngredient: List<LocalIngredient>
-)
-
+    val instructions: String,
+    var isFavorite : Int
+    )

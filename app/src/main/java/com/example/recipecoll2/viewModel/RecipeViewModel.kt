@@ -10,7 +10,7 @@ import kotlinx.coroutines.launch
 
 class RecipeViewModel (val repository: Repository) : ViewModel() {
 
-    var selectRecipe : Recipe? = null
+    var showRecipe : Recipe? = null
     val scope = CoroutineScope(Dispatchers.IO)
     val recipeLive : MutableLiveData<MutableList<Recipe>> by lazy {
         MutableLiveData<MutableList<Recipe>>()
@@ -22,6 +22,12 @@ class RecipeViewModel (val repository: Repository) : ViewModel() {
             recipeLive.postValue(data)
         }
    }
+
+    fun updateRecipe(recipeId:Int,isSelected:Int){
+        scope.launch {
+            repository.updateRecipe(recipeId,isSelected)
+        }
+    }
 
 //    fun saveData(){
 //        scope.launch {

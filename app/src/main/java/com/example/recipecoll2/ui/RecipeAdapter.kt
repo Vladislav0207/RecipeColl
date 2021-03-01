@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.recipecoll2.R
 import com.example.recipecoll2.remoteModel.Recipe
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.recipe_item.view.*
 
 class RecipeAdapter (val recipes: MutableList<Recipe>, val fragment: MainFragment):
     RecyclerView.Adapter<RecipeAdapter.RecipeViewHolder>() {
@@ -17,6 +18,7 @@ class RecipeAdapter (val recipes: MutableList<Recipe>, val fragment: MainFragmen
         val name = itemView.findViewById<TextView>(R.id.nameRecipe)
         val ingredients = itemView.findViewById<TextView>(R.id.ingredientsRecipe)
         val icon = itemView.findViewById<ImageView>(R.id.imageRecipe)
+        val iconFavorite = itemView.findViewById<ImageView>(R.id.imageRecipeAddFavorite)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecipeViewHolder {
@@ -24,7 +26,11 @@ class RecipeAdapter (val recipes: MutableList<Recipe>, val fragment: MainFragmen
         val holder = RecipeViewHolder(itemView)
 
         holder.itemView.setOnClickListener {
-            fragment.selectRecipe(holder.adapterPosition)
+            fragment.showRecipe(holder.adapterPosition)
+        }
+
+        holder.itemView.imageRecipeAddFavorite.setOnClickListener {
+            fragment.addFavoriteRecipe(holder.adapterPosition)
         }
 
         return holder
@@ -50,5 +56,12 @@ class RecipeAdapter (val recipes: MutableList<Recipe>, val fragment: MainFragmen
         holder.ingredients.text=body
 
         Picasso.get().load(recipes[position].image).into(holder.icon)
+
+        if (recipes[position].isFavorite == 0){
+            holder.iconFavorite.setImageResource(R.drawable.ic_favorite_border_24)
+        }
+        else{
+            holder.iconFavorite.setImageResource(R.drawable.ic_favorite_24)
+        }
     }
 }

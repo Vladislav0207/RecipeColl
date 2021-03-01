@@ -1,6 +1,5 @@
 package com.example.recipecoll2.ui
 
-import android.icu.text.Transliterator
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -15,13 +14,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.recipecoll2.R
 import com.example.recipecoll2.remoteModel.Recipe
 import com.example.recipecoll2.viewModel.RecipeViewModel
+import kotlinx.android.synthetic.main.fragment_favorite.*
 import kotlinx.android.synthetic.main.fragment_main.*
 
-class MainFragment : Fragment() {
+class FavoriteFragment: Fragment() {
     lateinit var navController: NavController
     lateinit var viewModel: RecipeViewModel
-    lateinit var adapter: RecipeAdapter
-    val recipes = mutableListOf<Recipe>()
+    val favoriteList = mutableListOf<Recipe>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,7 +34,7 @@ class MainFragment : Fragment() {
     ): View? {
 
         viewModel = ViewModelProvider(activity as MainActivity).get(RecipeViewModel::class.java)
-        return inflater.inflate(R.layout.fragment_main, container, false)
+        return inflater.inflate(R.layout.fragment_favorite, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -44,38 +43,18 @@ class MainFragment : Fragment() {
         navController = findNavController()
 
 
-         adapter = RecipeAdapter(recipes, this)
-        mainRecyclerView.adapter = adapter
-        mainRecyclerView.layoutManager = LinearLayoutManager(activity)
+        val adapter = RecipeAdapter(favoriteList, MainFragment())
+        favoriteRecyclerView.adapter = adapter
+        favoriteRecyclerView.layoutManager = LinearLayoutManager(activity)
 
 
         viewModel.getData()
         viewModel.recipeLive.observe(activity as MainActivity, Observer {
-            recipes.clear()
-            recipes.addAll(it)
-            mainRecyclerView.adapter?.notifyDataSetChanged()
+            favoriteList.clear()
+//            addAll(listRacipe.filter{recipe.isFavorite == 1})
+            favoriteList.addAll(it.filter { it.isFavorite == 1 })
+            favoriteRecyclerView.adapter?.notifyDataSetChanged()
         })
 
     }
-
-
-    fun showRecipe(position: Int) {
-        viewModel.showRecipe = recipes[position]
-        navController.navigate(R.id.informationFragment)
-    }
-
-    fun addFavoriteRecipe(position: Int){
-            if (recipes[position].isFavorite == 0) {
-                viewModel.updateRecipe(recipes[position].id, 1)
-                recipes[position].isFavorite = 1
-            } else {
-                viewModel.updateRecipe(recipes[position].id,0)
-                recipes[position].isFavorite=0
-            }
-            adapter.notifyItemChanged(position)
-        }
-
-
-
-    }
-
+}
