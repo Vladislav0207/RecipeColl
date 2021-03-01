@@ -1,10 +1,8 @@
 package com.example.recipecoll2.repository
 
 import android.util.Log
-import com.example.recipecoll2.localModel.LocalIngredient
 import com.example.recipecoll2.localModel.LocalModel
 import com.example.recipecoll2.localModel.LocalRecipe
-import com.example.recipecoll2.localModel.LocalRecipeWithIngredients
 import com.example.recipecoll2.remoteModel.*
 
 class Repository (
@@ -12,126 +10,53 @@ class Repository (
                   val localModel: LocalModel
 ) {
     suspend fun getData(): MutableList<Recipe> {
- //       val recipeList = remoteModel.getRemoteDataRecipe()
-        val recipeList = null
+//        val recipeList = remoteModel.getRemoteDataRecipe()
+        val recipeList : MutableList<Recipe>? = null
+        Log.d("!!!","recipeList")
         return if (recipeList != null) {
 
-//            Log.d("!!!loc1", recipeList.toString())
-//            //add recipe and ingredients in database
-//
-//            Log.d("!!!size", recipeList.size.toString())
-//            Log.d("!!!loc2", parseToLocal(recipeList).first.toString())
-//            Log.d("!!!loc2", parseToLocal(recipeList).second.toString())
-//                localModel.insertRecipes(parseToLocal(recipeList).first)
-//                localModel.insertIngredients(parseToLocal(recipeList).second)
+            Log.d("!!!","start")
 
+            val localRecipeList = mutableListOf<LocalRecipe>()
+            recipeList.mapTo(localRecipeList){LocalRecipe( it.id,
+                it.title,
+                it.readyInMinutes,
+                it.servings,
+                it.image,
+                it.instructions)}
 
-           val localRecipe = localModel.getAllRecipes()
-
-
-//            Log.d("!!!loc3",localRecipe.toString())
-//
-//            Log.d("!!!loc4", parseLocalTo(localRecipe).toString())
-
-            val recipe = parseLocalTo(localRecipe)
-
-            recipe
+            Log.d("!!!",localRecipeList.toString())
+            localModel.insertRecipes(localRecipeList)
+            Log.d("!!!","pisda")
+            for (i in 0 until recipeList.size ) {
+                Log.d("!!!",recipeList[i].extendedIngredients.toString())
+                localModel.insertIngredients(recipeList[i].extendedIngredients)
+            }
+            Log.d("!!!","ingrid")
+            Log.d("!!!","pisda")
+           val finishList = localModel.getAllRecipes()
+            finishList.toMutableList()
 
 
         } else {
-            val localRecipe = localModel.getAllRecipes()
-            parseLocalTo(localRecipe)
+            val finishList = localModel.getAllRecipes()
+            finishList.toMutableList()
         }
     }
 
-    suspend fun saveData(localRecipeList: MutableList<LocalRecipe>) {
-        localModel.insertRecipes(localRecipeList)
-    }
+//    suspend fun saveData(localRecipeList: MutableList<LocalRecipe>) {
+//        localModel.insertRecipes(localRecipeList)
+//    }
 
-    suspend fun saveOneRecipe(localRecipe: LocalRecipe) {
-        localModel.insertOneRecipe(localRecipe)
-    }
+//    suspend fun saveOneRecipe(localRecipe: LocalRecipe) {
+//        localModel.insertOneRecipe(localRecipe)
+//    }
 
-    suspend fun getOneRecipe(id: Int): Recipe {
-        val localRecipe = mutableListOf<LocalRecipe>()
-        localRecipe.add(localModel.getOneRecipe(id))
-        val recipe = parseLocalTo(localRecipe)
-        return recipe[0]
-    }
+//    suspend fun getOneRecipe(id: Int): Recipe {
+//        val localRecipe = mutableListOf<LocalRecipe>()
+//        localRecipe.add(localModel.getOneRecipe(id))
+//        val recipe = parseLocalTo(localRecipe)
+//        return recipe[0]
+//    }
 
-
-    suspend fun parseLocalTo(listLocalRecipe: List<LocalRecipe>): MutableList<Recipe> {
-        val listRecipe = mutableListOf<Recipe>()
-        for (i in 0 until listLocalRecipe.size) {
-            Log.d("!!!listI",i.toString())
-            val listLocalIngredients = localModel.getAllIngredientsByRecipeId(listLocalRecipe[i].id)
-            Log.d("!!!listLOC",listLocalIngredients.toString())
-            val listIngredients = mutableListOf<Ingredient>()
-            for (j in 0 until listLocalIngredients.size) {
-                Log.d("!!!j",j.toString())
-                Log.d("!!!listLoc",listLocalIngredients.toString())
-                listIngredients.add(
-                    Ingredient(
-                        listLocalIngredients[j].ingredientId,
-                        listLocalIngredients[j].IngredientImage,
-                        listLocalIngredients[j].nameClean,
-                        listLocalIngredients[j].amount,
-                        listLocalIngredients[j].unit,
-                        listLocalIngredients[j].recipeId
-                    )
-                )
-                Log.d("!!!listIng",listIngredients.toString())
-            }
-            listRecipe.add(
-                    Recipe(
-                        listIngredients,
-                        listLocalRecipe[i].id,
-                        listLocalRecipe[i].title,
-                        listLocalRecipe[i].readyInMinutes,
-                        listLocalRecipe[i].servings,
-                        listLocalRecipe[i].image,
-                        listLocalRecipe[i].instructions
-                    )
-                )
-
-        }
-        return listRecipe
-    }
-
-
-    fun parseToLocal(recipeList: MutableList<Recipe>): Pair<MutableList<LocalRecipe>, MutableList<LocalIngredient>> {
-        val localRecipeList = mutableListOf<LocalRecipe>()
-        val localIngredientList = mutableListOf<LocalIngredient>()
-        for (i in 0 until recipeList.size) {
-
-            // parsing Recipe to LocalRecipe
-
-            localRecipeList.add(
-                LocalRecipe(
-                    recipeList[i].id,
-                    recipeList[i].title,
-                    recipeList[i].readyInMinutes,
-                    recipeList[i].servings,
-                    recipeList[i].image,
-                    recipeList[i].instructions
-                )
-            )
-
-            //parsing Recipe to LocalIngredients and add recipeId
-            for (j in 0 until recipeList[i].extendedIngredients.size)
-                localIngredientList.add(
-                    LocalIngredient(
-                        recipeList[i].extendedIngredients[j].id,
-                        recipeList[i].extendedIngredients[j].image,
-                        recipeList[i].extendedIngredients[j].nameClean,
-                        recipeList[i].extendedIngredients[j].amount,
-                        recipeList[i].extendedIngredients[j].unit,
-                        recipeList[i].id
-                    )
-                )
-        }
-
-        Log.d("!!!localIngredientList!!", localIngredientList.toString())
-        return Pair(localRecipeList, localIngredientList)
-    }
 }

@@ -3,15 +3,16 @@ package com.example.recipecoll2.localModel
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
+import com.example.recipecoll2.remoteModel.Ingredient
 
 @Dao
 interface IngredientDao {
     @Insert
-    suspend fun insertIngredients(localIngredients  : MutableList<LocalIngredient>)
+    suspend fun insertAllIngredients(localIngredients : List<Ingredient>)
 
-    @Query("SELECT * FROM ingredients")
-    suspend fun getAllIngredients():MutableList<LocalIngredient>
+    @Query("SELECT * FROM ingredient")
+    suspend fun getAllIngredients():List<Ingredient>
 
-    @Query("select * from ingredients where recipeId = :recipeId" )
-    suspend fun getAllIngredientsByRecipeId(recipeId : Int):MutableList<LocalIngredient>
+    @Query("select * from ingredient where recipe_id = :recipeId" )
+    suspend fun getAllIngredientsByRecipeId(recipeId : Int):List<Ingredient>
 }

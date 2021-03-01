@@ -7,6 +7,10 @@ class RemoteModel() {
     suspend fun getRemoteDataRecipe() : MutableList<Recipe>{
         return try {
             val  recipesList = apiService.getRecipes(KEY, HOST, NUMBER).recipes
+            for (i in 0 until NUMBER){
+                recipesList[i].extendedIngredients.forEach{it.recipe_id = recipesList[i].id }
+            }
+
             recipesList
         }
         catch (e : Exception){

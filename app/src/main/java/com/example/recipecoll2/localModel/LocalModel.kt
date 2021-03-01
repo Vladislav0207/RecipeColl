@@ -2,6 +2,8 @@ package com.example.recipecoll2.localModel
 
 import android.content.Context
 import androidx.room.Room
+import com.example.recipecoll2.remoteModel.Ingredient
+import com.example.recipecoll2.remoteModel.Recipe
 
 class LocalModel (context: Context) {
     //build database
@@ -15,35 +17,24 @@ class LocalModel (context: Context) {
         recipeDatabase.recipeDao().insertRecipe(localRecipes)
     }
 
-    suspend fun insertOneRecipe(localRecipe: LocalRecipe){
-        recipeDatabase.recipeDao().insertOneRecipe(localRecipe)
+//    suspend fun insertOneRecipe(localRecipe: Recipe){
+//        recipeDatabase.recipeDao().insertOneRecipe(localRecipe)
+//    }
+
+    suspend fun getAllRecipes(): List<Recipe>{
+        return  recipeDatabase.recipeDao().getAllRecipe()
     }
 
-    suspend fun getAllRecipes(): MutableList<LocalRecipe>{
-        return  recipeDatabase.recipeDao().getAllRecipes()
+//    suspend fun getOneRecipe(id: Int): Recipe {
+//        return  recipeDatabase.recipeDao().getOneRecipe(id)
+//    }
+
+    suspend fun insertIngredients(localIngredients : List<Ingredient>){
+        recipeDatabase.ingredientDao().insertAllIngredients(localIngredients)
     }
 
-    suspend fun getOneRecipe(id: Int): LocalRecipe {
-        return  recipeDatabase.recipeDao().getOneRecipe(id)
-    }
-
-    suspend fun insertIngredients(localIngredients : MutableList<LocalIngredient>){
-        recipeDatabase.ingredientDao().insertIngredients(localIngredients)
-    }
-
-    suspend fun getAllIngredients(): MutableList<LocalIngredient>{
+    suspend fun getAllIngredients(): List<Ingredient>{
        return recipeDatabase.ingredientDao().getAllIngredients()
     }
 
-    suspend fun getRecipeWithIngredients(): List<LocalRecipeWithIngredients>{
-        return recipeDatabase.recipeDao().getRecipesWithIngredients()
-    }
-
-    suspend fun getOneRecipeWithIngredients(id:Int): LocalRecipeWithIngredients{
-        return recipeDatabase.recipeDao().getOneRecipeWithIngredients(id)
-    }
-
-    suspend fun getAllIngredientsByRecipeId(recipeId:Int) : MutableList<LocalIngredient>{
-        return recipeDatabase.ingredientDao().getAllIngredientsByRecipeId(recipeId)
-    }
 }

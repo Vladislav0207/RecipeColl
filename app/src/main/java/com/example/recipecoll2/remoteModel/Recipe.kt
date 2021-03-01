@@ -1,5 +1,6 @@
 package com.example.recipecoll2.remoteModel
 
+import androidx.room.*
 
 
 data class Recipes(
@@ -7,7 +8,8 @@ data class Recipes(
 )
 
 data class Recipe (
-    var extendedIngredients: MutableList<Ingredient>,
+    @Relation(parentColumn ="id", entityColumn = "recipe_id" )
+    var extendedIngredients: List<Ingredient>,
     var id: Int,
     val title: String,
     val readyInMinutes: Int,
@@ -15,11 +17,14 @@ data class Recipe (
     val image: String,
     val instructions: String
 )
+@Entity(tableName = "ingredient")
 data class Ingredient(
     val id: Int,
     val image:String,
     val nameClean: String,
     val amount: String,
     val unit: String,
-    val recipeId: Int
+    var recipe_id: Int,
+    @PrimaryKey (autoGenerate = true)
+    var key : Int=0
 )

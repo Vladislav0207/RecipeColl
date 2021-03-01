@@ -36,12 +36,12 @@ class RecipeViewModel (val repository: Repository) : ViewModel() {
 //        }
 //    }
 //
-    fun getOneRecipe(id :Int) {
-        scope.launch {
-            val recipe = repository.getOneRecipe(id)
-            val recipeList = mutableListOf<Recipe>()
-            recipeList.add(recipe)
-            recipeLive.postValue(recipeList)
-        }
-    }
+//    fun getOneRecipe(id :Int) {
+//        scope.launch {
+//            val recipe = repository.getOneRecipe(id)
+//            val recipeList = mutableListOf<Recipe>()
+//            recipeList.add(recipe)
+//            recipeLive.postValue(recipeList)
+//        }
+//    }
 }
