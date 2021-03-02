@@ -10,7 +10,7 @@ class Repository (
                   val localModel: LocalModel
 ) {
     suspend fun getData(): MutableList<Recipe> {
- //      val recipeList = remoteModel.getRemoteDataRecipe()
+  //    val recipeList = remoteModel.getRemoteDataRecipe()
       val recipeList : MutableList<Recipe>? = null
         Log.d("!!!","recipeList")
         return if (recipeList != null) {
@@ -50,19 +50,8 @@ class Repository (
         localModel.updateRecipe(recipeId, isSelected)
     }
 
-//    suspend fun saveData(localRecipeList: MutableList<LocalRecipe>) {
-//        localModel.insertRecipes(localRecipeList)
-//    }
-
-//    suspend fun saveOneRecipe(localRecipe: LocalRecipe) {
-//        localModel.insertOneRecipe(localRecipe)
-//    }
-
-//    suspend fun getOneRecipe(id: Int): Recipe {
-//        val localRecipe = mutableListOf<LocalRecipe>()
-//        localRecipe.add(localModel.getOneRecipe(id))
-//        val recipe = parseLocalTo(localRecipe)
-//        return recipe[0]
-//    }
+    suspend fun getAllIngredients():List<Ingredient>{
+        return localModel.getAllIngredients()
+    }
 
 }

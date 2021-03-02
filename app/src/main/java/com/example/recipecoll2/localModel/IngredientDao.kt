@@ -13,6 +13,4 @@ interface IngredientDao {
     @Query("SELECT * FROM ingredient")
     suspend fun getAllIngredients():List<Ingredient>
 
-    @Query("select * from ingredient where recipe_id = :recipeId" )
-    suspend fun getAllIngredientsByRecipeId(recipeId : Int):List<Ingredient>
 }

@@ -23,4 +23,10 @@
         android:name="com.example.recipecoll2.ui.FavoriteFragment"
         android:label="fragment_favorite"
         tools:layout="@layout/fragment_favorite" />
+
+    <fragment
+        android:id="@+id/searchIngredientFragment"
+        android:name="com.example.recipecoll2.ui.SearchIngredientFragment"
+        android:label="fragment_search_ingredient"
+        tools:layout="@layout/fragment_search_ingredient" />
 </navigation>

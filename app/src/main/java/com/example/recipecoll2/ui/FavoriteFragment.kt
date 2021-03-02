@@ -51,7 +51,7 @@ class FavoriteFragment: Fragment() {
         viewModel.getData()
         viewModel.recipeLive.observe(activity as MainActivity, Observer {
             favoriteList.clear()
-//            addAll(listRacipe.filter{recipe.isFavorite == 1})
+//            addAll (of) listRacipe (where) recipe.isFavorite == 1
             favoriteList.addAll(it.filter { it.isFavorite == 1 })
             favoriteRecyclerView.adapter?.notifyDataSetChanged()
         })

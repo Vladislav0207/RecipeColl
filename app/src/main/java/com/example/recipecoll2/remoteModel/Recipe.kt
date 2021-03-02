@@ -27,5 +27,6 @@ data class Ingredient(
     val unit: String,
     var recipe_id: Int,
     @PrimaryKey (autoGenerate = true)
-    var key : Int=0
+    var key : Int=0,
+    var isSelect : Int =0
 )
