@@ -11,8 +11,8 @@ class Repository @Inject constructor (
                   val localModel: LocalModel
 ) {
     suspend fun getData(): MutableList<Recipe> {
-      val recipeList = remoteModel.getRemoteDataRecipe()
-//      val recipeList : MutableList<Recipe>? = null
+    //  val recipeList = remoteModel.getRemoteDataRecipe()
+      val recipeList : MutableList<Recipe>? = null
         return if (recipeList != null) {
 
 

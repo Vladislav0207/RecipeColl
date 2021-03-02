@@ -44,7 +44,7 @@ class ResultSearchFragment : Fragment() {
         navController = findNavController()
 
         val listOfNames = viewModel.listOfNamesIngredientSelected
-        viewModel.searchByIngredient(listOfNames)
+         viewModel.searchByIngredient(listOfNames)
 
 
         val adapter = RecipeAdapter(resultList, MainFragment())

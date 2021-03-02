@@ -20,10 +20,11 @@ import kotlinx.android.synthetic.main.fragment_main.*
 class FavoriteFragment: Fragment() {
     lateinit var navController: NavController
     lateinit var viewModel: RecipeViewModel
-    val favoriteList = mutableListOf<Recipe>()
+    var favoriteList = mutableListOf<Recipe>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
 
 
     }
@@ -42,19 +43,10 @@ class FavoriteFragment: Fragment() {
 
         navController = findNavController()
 
-
+        favoriteList.addAll(viewModel.recipeLive.value!!.filter { it.isFavorite == 1 })
         val adapter = RecipeAdapter(favoriteList, MainFragment())
         favoriteRecyclerView.adapter = adapter
-        favoriteRecyclerView.layoutManager = LinearLayoutManager(activity)
-
-
-        viewModel.getData()
-        viewModel.recipeLive.observe(activity as MainActivity, Observer {
-            favoriteList.clear()
-//            addAll (of) listRacipe (where) recipe.isFavorite == 1
-            favoriteList.addAll(it.filter { it.isFavorite == 1 })
-            favoriteRecyclerView.adapter?.notifyDataSetChanged()
-        })
+        favoriteRecyclerView.layoutManager = LinearLayoutManager(requireContext())
 
     }
 }

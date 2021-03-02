@@ -18,6 +18,8 @@ class RecipeViewModel (val repository: Repository) : ViewModel() {
     }
     val scope = CoroutineScope(Dispatchers.IO)
 
+    val favoriteList = mutableListOf<Recipe>()
+
     val recipeLive : MutableLiveData<MutableList<Recipe>> by lazy {
         MutableLiveData<MutableList<Recipe>>()
     }

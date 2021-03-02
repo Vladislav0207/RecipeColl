@@ -21,10 +21,11 @@ class MainFragment : Fragment() {
     lateinit var navController: NavController
     lateinit var viewModel: RecipeViewModel
     lateinit var adapter: RecipeAdapter
-    val recipes = mutableListOf<Recipe>()
+    var recipes = mutableListOf<Recipe>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
 
 
     }
@@ -33,7 +34,6 @@ class MainFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         viewModel = ViewModelProvider(activity as MainActivity).get(RecipeViewModel::class.java)
         return inflater.inflate(R.layout.fragment_main, container, false)
     }
@@ -44,15 +44,16 @@ class MainFragment : Fragment() {
         navController = findNavController()
 
 
-         adapter = RecipeAdapter(recipes, this)
+        viewModel.getData()
+        recipes = viewModel.recipeLive.value!!
+        adapter = RecipeAdapter(recipes, this)
         mainRecyclerView.adapter = adapter
         mainRecyclerView.layoutManager = LinearLayoutManager(activity)
 
-
-        viewModel.getData()
         viewModel.recipeLive.observe(activity as MainActivity, Observer {
             recipes.clear()
             recipes.addAll(it)
+            Log.d("!!!",recipes.toString())
             mainRecyclerView.adapter?.notifyDataSetChanged()
         })
 
