@@ -1,5 +1,6 @@
 package com.example.recipecoll2.remoteModel
 
+import com.example.recipecoll2.KEY
 import java.lang.Exception
 import javax.inject.Inject
 
