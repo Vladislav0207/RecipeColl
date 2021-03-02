@@ -29,4 +29,11 @@
         android:name="com.example.recipecoll2.ui.SearchIngredientFragment"
         android:label="fragment_search_ingredient"
         tools:layout="@layout/fragment_search_ingredient" />
+
+
+    <fragment
+        android:id="@+id/resultSearchFragment"
+        android:name="com.example.recipecoll2.ui.ResultSearchFragment"
+        android:label="fragment_result_search"
+        tools:layout="@layout/fragment_result_search" />
 </navigation>

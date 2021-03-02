@@ -43,13 +43,25 @@ class SearchIngredientFragment: Fragment() {
         ingredientRecyclerView.layoutManager = LinearLayoutManager(activity)
 
         viewModel.getAllIngredients()
-
-        viewModel.getData()
         viewModel.ingredientsLive.observe(activity as MainActivity, Observer {
             ingredients.clear()
             ingredients.addAll(it)
             ingredientRecyclerView.adapter?.notifyDataSetChanged()
         })
+
+
+        btnResultSearch.setOnClickListener {
+            val listNameIngredients : MutableList<String> = ingredients.
+            filter { it.isSelect == 1 }.
+                mapTo(mutableListOf<String>())
+                {
+                    it.nameClean
+                }
+
+            viewModel.listOfSelectedIngredient = listNameIngredients
+
+            navController.navigate(R.id.resultSearchFragment)
+        }
     }
 
     fun selectIngredient(position: Int) {
@@ -62,7 +74,4 @@ class SearchIngredientFragment: Fragment() {
         adapter.notifyItemChanged(position)
 
     }
-
-
-
 }

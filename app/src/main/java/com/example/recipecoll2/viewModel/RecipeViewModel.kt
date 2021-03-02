@@ -22,6 +22,12 @@ class RecipeViewModel (val repository: Repository) : ViewModel() {
         MutableLiveData<MutableList<Recipe>>()
     }
 
+    val recipeResultLive : MutableLiveData<MutableList<Recipe>> by lazy {
+        MutableLiveData<MutableList<Recipe>>()
+    }
+
+    var listOfSelectedIngredient = mutableListOf<String>()
+
     fun getData() {
         scope.launch {
             val data = repository.getData()
