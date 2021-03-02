@@ -40,7 +40,7 @@ class SearchIngredientFragment: Fragment() {
 
         adapter = IngredientAdapter(ingredients, this)
         ingredientRecyclerView.adapter = adapter
-        ingredientRecyclerView.layoutManager = LinearLayoutManager(activity)
+        ingredientRecyclerView.layoutManager = LinearLayoutManager(this.context)
 
         viewModel.getAllIngredients()
         viewModel.ingredientsLive.observe(activity as MainActivity, Observer {
