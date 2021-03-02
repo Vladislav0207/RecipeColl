@@ -13,8 +13,8 @@ class RecipeViewModel (val repository: Repository) : ViewModel() {
 
     var showRecipe : Recipe? = null
 
-    val ingredientsLive : MutableLiveData<MutableList<Ingredient>> by lazy {
-        MutableLiveData<MutableList<Ingredient>>()
+    val ingredientsLive : MutableLiveData<Set<Ingredient>> by lazy {
+        MutableLiveData<Set<Ingredient>>()
     }
     val scope = CoroutineScope(Dispatchers.IO)
 
@@ -43,7 +43,7 @@ class RecipeViewModel (val repository: Repository) : ViewModel() {
 
     fun getAllIngredients() {
         scope.launch {
-            val data = repository.getAllIngredients().toMutableList()
+            val data = repository.getAllIngredients().toSet()
             ingredientsLive.postValue(data)
         }
     }

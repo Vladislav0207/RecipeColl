@@ -4,8 +4,9 @@ import android.util.Log
 import com.example.recipecoll2.localModel.LocalModel
 import com.example.recipecoll2.localModel.LocalRecipe
 import com.example.recipecoll2.remoteModel.*
+import javax.inject.Inject
 
-class Repository (
+class Repository @Inject constructor (
                   val remoteModel: RemoteModel,
                   val localModel: LocalModel
 ) {

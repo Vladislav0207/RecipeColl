@@ -1,8 +1,9 @@
 package com.example.recipecoll2.remoteModel
 
 import java.lang.Exception
+import javax.inject.Inject
 
-class RemoteModel() {
+class RemoteModel @Inject constructor() {
     private val apiService = ApiService.create()
     suspend fun getRemoteDataRecipe() : MutableList<Recipe>{
         return try {

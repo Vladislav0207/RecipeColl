@@ -16,12 +16,16 @@ import com.example.recipecoll2.remoteModel.RemoteModel
 import com.example.recipecoll2.repository.Repository
 import com.example.recipecoll2.viewModel.RecipeViewModel
 import com.example.recipecoll2.viewModel.RecipeViewModelFactory
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.*
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     lateinit var navController: NavController
     lateinit var viewModel: RecipeViewModel
+    @Inject lateinit var factory: RecipeViewModelFactory
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,10 +39,6 @@ class MainActivity : AppCompatActivity() {
         nav_view.setupWithNavController(navController)
 
 
-        val remoteModel = RemoteModel()
-        val localModel= LocalModel(this)
-        val repository = Repository(remoteModel,localModel)
-        val factory = RecipeViewModelFactory(repository)
 
 
 

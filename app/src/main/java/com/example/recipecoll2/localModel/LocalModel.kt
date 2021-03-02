@@ -4,8 +4,10 @@ import android.content.Context
 import androidx.room.Room
 import com.example.recipecoll2.remoteModel.Ingredient
 import com.example.recipecoll2.remoteModel.Recipe
+import dagger.hilt.android.qualifiers.ApplicationContext
+import javax.inject.Inject
 
-class LocalModel (context: Context) {
+class LocalModel @Inject constructor (@ApplicationContext context: Context) {
     //build database
     val recipeDatabase : RecipeDatabase = Room.databaseBuilder(context,
         RecipeDatabase::class.java,
