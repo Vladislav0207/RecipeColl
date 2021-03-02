@@ -25,10 +25,6 @@ interface ApiService {
 
 
 
-//    @GET("https://openweathermap.org/img/w/{imgId}.png")
-//    suspend fun getIcon(
-//        @Path("imgId") imgId:String) : ResponseBody
-
     companion object Factory {
         fun create(): ApiService {
             val okHttpClient = OkHttpClient.Builder()

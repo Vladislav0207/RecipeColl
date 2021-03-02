@@ -11,12 +11,10 @@ class Repository @Inject constructor (
                   val localModel: LocalModel
 ) {
     suspend fun getData(): MutableList<Recipe> {
-  //    val recipeList = remoteModel.getRemoteDataRecipe()
-      val recipeList : MutableList<Recipe>? = null
-        Log.d("!!!","recipeList")
+      val recipeList = remoteModel.getRemoteDataRecipe()
+//      val recipeList : MutableList<Recipe>? = null
         return if (recipeList != null) {
 
-            Log.d("!!!","start")
 
             val localRecipeList = mutableListOf<LocalRecipe>()
             recipeList.mapTo(localRecipeList){LocalRecipe( it.id,
@@ -27,15 +25,12 @@ class Repository @Inject constructor (
                 it.instructions,
                 it.isFavorite)}
 
-            Log.d("!!!",localRecipeList.toString())
             localModel.insertRecipes(localRecipeList)
-            Log.d("!!!","pisda")
             for (i in 0 until recipeList.size ) {
-                Log.d("!!!",recipeList[i].extendedIngredients.toString())
                 localModel.insertIngredients(recipeList[i].extendedIngredients)
             }
-            Log.d("!!!","ingrid")
-            Log.d("!!!","pisda")
+
+
            val finishList = localModel.getAllRecipes()
             finishList.toMutableList()
 
@@ -60,11 +55,14 @@ class Repository @Inject constructor (
         val resultList = mutableListOf<Recipe>()
 
         for (i in 0 until  recipeList.size){
-//            recipeList[i]
+//           -- recipeList[i]--
+
             var h =0
             for (j in 0 until  recipeList[i].extendedIngredients.size) {
-//                recipeList[i].extendedIngredients[j]
+//               -- recipeList[i].extendedIngredients[j]--
+
                 for (k in 0 until  listOfNames.size){
+
                     if (recipeList[i].extendedIngredients[j].nameClean == listOfNames[k]){
                         h+=1
                     }
