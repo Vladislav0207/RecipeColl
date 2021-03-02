@@ -15,12 +15,13 @@ import com.example.recipecoll2.remoteModel.Recipe
 import com.example.recipecoll2.viewModel.RecipeViewModel
 import kotlinx.android.synthetic.main.fragment_favorite.*
 import kotlinx.android.synthetic.main.fragment_result_search.*
+import kotlinx.android.synthetic.main.fragment_search_ingredient.*
 
 class ResultSearchFragment : Fragment() {
     lateinit var navController: NavController
     lateinit var viewModel: RecipeViewModel
-    lateinit var recipeList: MutableList<Recipe>
     var resultList = mutableListOf<Recipe>()
+    var listOfNames = mutableListOf<String>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,34 +44,19 @@ class ResultSearchFragment : Fragment() {
 
         navController = findNavController()
 
-        recipeList= viewModel.recipeLive.value!!
-        val listOfNames= viewModel.listOfSelectedIngredient
-
-
-
-        for (i in 0 until  recipeList.size){
-//            recipeList[i]
-           var h =0
-            for (j in 0 until  recipeList[i].extendedIngredients.size) {
-//                recipeList[i].extendedIngredients[j]
-                for (k in 0 until  listOfNames.size){
-                    if (recipeList[i].extendedIngredients[j].nameClean == listOfNames[k]){
-                        h+=1
-                    }
-                }
-            }
-            if (h == listOfNames.size){
-               resultList.add(recipeList[i])
-            }
-        }
+        listOfNames = viewModel.listOfNamesIngredientSelected
+        viewModel.searchByIngredient(listOfNames)
 
 
         val adapter = RecipeAdapter(resultList, MainFragment())
         resultSearchRecyclerView.adapter = adapter
         resultSearchRecyclerView.layoutManager = LinearLayoutManager(activity)
 
-
-
+        viewModel.recipeResultLive.observe(activity as MainActivity, Observer {
+            resultList.clear()
+            resultList.addAll(it)
+            resultSearchRecyclerView.adapter?.notifyDataSetChanged()
+        })
 
     }
 }

@@ -26,7 +26,7 @@ class RecipeViewModel (val repository: Repository) : ViewModel() {
         MutableLiveData<MutableList<Recipe>>()
     }
 
-    var listOfSelectedIngredient = mutableListOf<String>()
+    var listOfNamesIngredientSelected = mutableListOf<String>()
 
     fun getData() {
         scope.launch {
@@ -45,6 +45,13 @@ class RecipeViewModel (val repository: Repository) : ViewModel() {
         scope.launch {
             val data = repository.getAllIngredients().toSet()
             ingredientsLive.postValue(data)
+        }
+    }
+
+    fun searchByIngredient(listOfNames: MutableList<String>){
+        scope.launch {
+            val data = repository.searchByIngredient(listOfNames)
+            recipeResultLive.postValue(data)
         }
     }
 }

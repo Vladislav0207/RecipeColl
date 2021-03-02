@@ -55,4 +55,25 @@ class Repository @Inject constructor (
         return localModel.getAllIngredients()
     }
 
+    suspend fun searchByIngredient (listOfNames : MutableList<String>) : MutableList<Recipe>{
+       val recipeList= getData()
+        val resultList = mutableListOf<Recipe>()
+
+        for (i in 0 until  recipeList.size){
+//            recipeList[i]
+            var h =0
+            for (j in 0 until  recipeList[i].extendedIngredients.size) {
+//                recipeList[i].extendedIngredients[j]
+                for (k in 0 until  listOfNames.size){
+                    if (recipeList[i].extendedIngredients[j].nameClean == listOfNames[k]){
+                        h+=1
+                    }
+                }
+            }
+            if (h == listOfNames.size){
+                resultList.add(recipeList[i])
+            }
+        }
+        return resultList
+    }
 }

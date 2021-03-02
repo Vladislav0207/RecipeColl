@@ -50,19 +50,25 @@ class SearchIngredientFragment: Fragment() {
         })
 
 
+
+
         btnResultSearch.setOnClickListener {
             val listNameIngredients : MutableList<String> = ingredients.
+
+                //create list of names
             filter { it.isSelect == 1 }.
                 mapTo(mutableListOf<String>())
                 {
                     it.nameClean
                 }
 
-            viewModel.listOfSelectedIngredient = listNameIngredients
+            viewModel.listOfNamesIngredientSelected = listNameIngredients
 
             navController.navigate(R.id.resultSearchFragment)
         }
     }
+
+
 
     fun selectIngredient(position: Int) {
 
