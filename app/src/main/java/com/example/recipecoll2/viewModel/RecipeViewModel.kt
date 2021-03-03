@@ -43,6 +43,22 @@ class RecipeViewModel (val repository: Repository) : ViewModel() {
         }
     }
 
+    fun updateInFavorites(position :Int){
+        scope.launch {
+            updateRecipe(recipeLive.value!![position].id,1)
+            recipeLive.value!![position].isFavorite = 1
+            favoriteList.add(recipeLive.value!![position])
+        }
+    }
+
+    fun updateOutFavorites(position :Int){
+        scope.launch {
+            updateRecipe(recipeLive.value!![position].id,0)
+            recipeLive.value!![position].isFavorite = 0
+            favoriteList.remove(recipeLive.value!![position])
+        }
+    }
+
     fun getAllIngredients() {
         scope.launch {
             val data = repository.getAllIngredients().toMutableSet()

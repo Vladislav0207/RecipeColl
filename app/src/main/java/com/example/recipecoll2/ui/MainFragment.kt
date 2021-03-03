@@ -26,8 +26,6 @@ class MainFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-
-
     }
 
     override fun onCreateView(
@@ -35,6 +33,9 @@ class MainFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         viewModel = ViewModelProvider(activity as MainActivity).get(RecipeViewModel::class.java)
+
+
+
         return inflater.inflate(R.layout.fragment_main, container, false)
     }
 
@@ -43,19 +44,20 @@ class MainFragment : Fragment() {
 
         navController = findNavController()
 
-
         viewModel.getData()
         recipes = viewModel.recipeLive.value!!
-        adapter = RecipeAdapter(recipes, this)
-        mainRecyclerView.adapter = adapter
-        mainRecyclerView.layoutManager = LinearLayoutManager(activity)
-
         viewModel.recipeLive.observe(activity as MainActivity, Observer {
             recipes.clear()
             recipes.addAll(it)
             Log.d("!!!",recipes.toString())
             mainRecyclerView.adapter?.notifyDataSetChanged()
         })
+
+
+        adapter = RecipeAdapter(recipes, this)
+        mainRecyclerView.adapter = adapter
+        mainRecyclerView.layoutManager = LinearLayoutManager(activity)
+
 
     }
 
@@ -64,19 +66,17 @@ class MainFragment : Fragment() {
         viewModel.showRecipe = recipes[position]
         navController.navigate(R.id.informationFragment)
     }
-
-    fun addFavoriteRecipe(position: Int){
-            if (recipes[position].isFavorite == 0) {
-                viewModel.updateRecipe(recipes[position].id, 1)
-                recipes[position].isFavorite = 1
-            } else {
-                viewModel.updateRecipe(recipes[position].id,0)
-                recipes[position].isFavorite=0
-            }
-            adapter.notifyItemChanged(position)
+    fun changeFavoriteRecipe(position: Int){
+        viewModel = ViewModelProvider(activity as MainActivity).get(RecipeViewModel::class.java)
+        if (viewModel.favoriteList.contains(recipes[position])) {
+            viewModel.updateOutFavorites(position)
+        } else {
+            viewModel.updateInFavorites(position)
         }
-
-
-
+        adapter.notifyItemChanged(position)
     }
+
+
+
+}
 

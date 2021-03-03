@@ -8,11 +8,13 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.recipecoll2.R
 import com.example.recipecoll2.remoteModel.Recipe
+import com.example.recipecoll2.viewModel.RecipeViewModel
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.recipe_item.view.*
 
-class RecipeAdapter (val recipes: MutableList<Recipe>, val fragment: MainFragment):
+class RecipeAdapter (val recipes: MutableList<Recipe>, val viewModel : MainFragment):
     RecyclerView.Adapter<RecipeAdapter.RecipeViewHolder>() {
+
 
     class RecipeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         val name = itemView.findViewById<TextView>(R.id.nameRecipe)
@@ -30,7 +32,7 @@ class RecipeAdapter (val recipes: MutableList<Recipe>, val fragment: MainFragmen
         }
 
         holder.itemView.imageRecipeAddFavorite.setOnClickListener {
-            fragment.addFavoriteRecipe(holder.adapterPosition)
+            fragment.changeFavoriteRecipe(holder.adapterPosition)
         }
 
         return holder

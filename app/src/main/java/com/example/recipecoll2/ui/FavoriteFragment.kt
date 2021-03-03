@@ -47,6 +47,6 @@ class FavoriteFragment: Fragment() {
         val adapter = RecipeAdapter(favoriteList, MainFragment())
         favoriteRecyclerView.adapter = adapter
         favoriteRecyclerView.layoutManager = LinearLayoutManager(requireContext())
-
+        favoriteRecyclerView.adapter!!.notifyDataSetChanged()
     }
 }
