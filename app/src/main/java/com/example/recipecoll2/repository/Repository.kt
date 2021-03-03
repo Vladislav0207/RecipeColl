@@ -74,4 +74,10 @@ class Repository @Inject constructor (
         }
         return resultList
     }
+
+    suspend fun getFavorites():MutableList<Recipe>{
+        val List = localModel.getAllRecipes().filter { it.isFavorite == 1 }
+        val listOfFavorite = List.toMutableList()
+        return listOfFavorite
+    }
 }

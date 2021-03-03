@@ -44,21 +44,26 @@ class MainFragment : Fragment() {
 
         navController = findNavController()
 
+
+
+        viewModel.getFavorites()
         viewModel.getData()
         recipes = viewModel.recipeLive.value!!
-        viewModel.recipeLive.observe(activity as MainActivity, Observer {
-            recipes.clear()
-            recipes.addAll(it)
-            Log.d("!!!",recipes.toString())
-            mainRecyclerView.adapter?.notifyDataSetChanged()
-        })
 
 
         adapter = RecipeAdapter(recipes, this)
         mainRecyclerView.adapter = adapter
-        mainRecyclerView.layoutManager = LinearLayoutManager(activity)
+        mainRecyclerView.layoutManager = LinearLayoutManager(context)
 
+        viewModel.recipeLive.observe(activity as MainActivity, Observer {
+            recipes.clear()
+            recipes.addAll(it)
+            Log.d("!!!R",it.toString())
 
+            if(mainRecyclerView != null) {
+                mainRecyclerView.adapter?.notifyDataSetChanged()
+            }
+        })
     }
 
 
@@ -67,15 +72,13 @@ class MainFragment : Fragment() {
         navController.navigate(R.id.informationFragment)
     }
     fun changeFavoriteRecipe(position: Int){
-        viewModel = ViewModelProvider(activity as MainActivity).get(RecipeViewModel::class.java)
-        if (viewModel.favoriteList.contains(recipes[position])) {
-            viewModel.updateOutFavorites(position)
-        } else {
+        if (recipes[position].isFavorite == 0) {
             viewModel.updateInFavorites(position)
+        } else {
+            viewModel.updateOutFavorites(position)
         }
-        adapter.notifyItemChanged(position)
+        mainRecyclerView.adapter!!.notifyItemChanged(position)
     }
-
 
 
 }

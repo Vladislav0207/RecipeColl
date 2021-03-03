@@ -1,13 +1,12 @@
 package com.example.recipecoll2.viewModel
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.recipecoll2.remoteModel.Ingredient
 import com.example.recipecoll2.remoteModel.Recipe
 import com.example.recipecoll2.repository.Repository
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 
 class RecipeViewModel (val repository: Repository) : ViewModel() {
 
@@ -17,6 +16,7 @@ class RecipeViewModel (val repository: Repository) : ViewModel() {
         MutableLiveData<MutableSet<Ingredient>>()
     }
     val scope = CoroutineScope(Dispatchers.IO)
+
 
     val favoriteList = mutableListOf<Recipe>()
 
@@ -47,7 +47,7 @@ class RecipeViewModel (val repository: Repository) : ViewModel() {
         scope.launch {
             updateRecipe(recipeLive.value!![position].id,1)
             recipeLive.value!![position].isFavorite = 1
-            favoriteList.add(recipeLive.value!![position])
+            favoriteList!!.add(recipeLive.value!![position])
         }
     }
 
@@ -55,7 +55,7 @@ class RecipeViewModel (val repository: Repository) : ViewModel() {
         scope.launch {
             updateRecipe(recipeLive.value!![position].id,0)
             recipeLive.value!![position].isFavorite = 0
-            favoriteList.remove(recipeLive.value!![position])
+            favoriteList?.remove(recipeLive.value!![position])
         }
     }
 
@@ -70,6 +70,15 @@ class RecipeViewModel (val repository: Repository) : ViewModel() {
         scope.launch {
             val data = repository.searchByIngredient(listOfNames)
             recipeResultLive.postValue(data)
+        }
+    }
+
+    fun getFavorites() {
+        CoroutineScope(Dispatchers.Main).launch  {
+            val data = repository.getFavorites()
+            Log.d("!!!RRR",repository.getFavorites().toString())
+            favoriteList.clear()
+            favoriteList.addAll(data)
         }
     }
 }

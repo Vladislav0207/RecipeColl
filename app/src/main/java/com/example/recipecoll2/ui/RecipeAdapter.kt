@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.recipecoll2.R
 import com.example.recipecoll2.remoteModel.Recipe
@@ -12,7 +13,7 @@ import com.example.recipecoll2.viewModel.RecipeViewModel
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.recipe_item.view.*
 
-class RecipeAdapter (val recipes: MutableList<Recipe>, val viewModel : MainFragment):
+class RecipeAdapter (val recipes: MutableList<Recipe>, val fragment: MainFragment):
     RecyclerView.Adapter<RecipeAdapter.RecipeViewHolder>() {
 
 

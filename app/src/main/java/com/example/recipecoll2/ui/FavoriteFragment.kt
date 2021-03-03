@@ -20,7 +20,7 @@ import kotlinx.android.synthetic.main.fragment_main.*
 class FavoriteFragment: Fragment() {
     lateinit var navController: NavController
     lateinit var viewModel: RecipeViewModel
-    var favoriteList = mutableListOf<Recipe>()
+    var favoriteRecipesList = mutableListOf<Recipe>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,6 +35,8 @@ class FavoriteFragment: Fragment() {
     ): View? {
 
         viewModel = ViewModelProvider(activity as MainActivity).get(RecipeViewModel::class.java)
+
+
         return inflater.inflate(R.layout.fragment_favorite, container, false)
     }
 
@@ -43,10 +45,33 @@ class FavoriteFragment: Fragment() {
 
         navController = findNavController()
 
-        favoriteList.addAll(viewModel.recipeLive.value!!.filter { it.isFavorite == 1 })
-        val adapter = RecipeAdapter(favoriteList, MainFragment())
+
+
+        Log.d("!!!FF",viewModel.favoriteList.toString())
+        favoriteRecipesList.addAll(viewModel.favoriteList)
+
+        val adapter = RecipeFavoriteAdapter(favoriteRecipesList, this)
         favoriteRecyclerView.adapter = adapter
         favoriteRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+        favoriteRecyclerView.adapter?.notifyDataSetChanged()
+
+
+    }
+
+
+    fun showRecipeInFavorite(position: Int) {
+        viewModel.showRecipe = favoriteRecipesList[position]
+        navController.navigate(R.id.informationFragment)
+    }
+
+
+    fun changeFavoriteRecipeInFavorite(position: Int){
+            viewModel.updateOutFavorites(position)
+        favoriteRecipesList.remove(favoriteRecipesList[position])
         favoriteRecyclerView.adapter!!.notifyDataSetChanged()
+    }
+
+    fun getFavorites(){
+        viewModel.getFavorites()
     }
 }
