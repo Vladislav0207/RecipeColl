@@ -47,15 +47,14 @@ class RecipeViewModel (val repository: Repository) : ViewModel() {
         scope.launch {
             updateRecipe(recipeLive.value!![position].id,1)
             recipeLive.value!![position].isFavorite = 1
-            favoriteList!!.add(recipeLive.value!![position])
+            favoriteList.add(recipeLive.value!![position])
         }
     }
 
-    fun updateOutFavorites(position :Int){
+    fun updateOutFavorites(recipeId: Int){
         scope.launch {
-            updateRecipe(recipeLive.value!![position].id,0)
-            recipeLive.value!![position].isFavorite = 0
-            favoriteList?.remove(recipeLive.value!![position])
+            updateRecipe(recipeId,0)
+            favoriteList.removeIf{it.id == recipeId}
         }
     }
 

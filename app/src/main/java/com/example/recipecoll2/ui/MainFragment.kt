@@ -75,7 +75,8 @@ class MainFragment : Fragment() {
         if (recipes[position].isFavorite == 0) {
             viewModel.updateInFavorites(position)
         } else {
-            viewModel.updateOutFavorites(position)
+            viewModel.updateOutFavorites(recipes[position].id)
+            viewModel.recipeLive.value!![position].isFavorite = 0
         }
         mainRecyclerView.adapter!!.notifyItemChanged(position)
     }

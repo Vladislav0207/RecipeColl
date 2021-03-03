@@ -53,16 +53,15 @@ class SearchIngredientFragment: Fragment() {
 
 
         btnResultSearch.setOnClickListener {
-            val listNameIngredients : MutableList<String> = ingredients.
-
-                //create list of names
+            //create list of names
+            val listNameIngredientsSelect : MutableList<String> = ingredients.
             filter { it.isSelect == 1 }.
                 mapTo(mutableListOf<String>())
                 {
                     it.nameClean
                 }
 
-            viewModel.listOfNamesIngredientSelected = listNameIngredients
+            viewModel.listOfNamesIngredientSelected = listNameIngredientsSelect
 
             navController.navigate(R.id.resultSearchFragment)
         }

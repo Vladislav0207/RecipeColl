@@ -45,8 +45,7 @@ class FavoriteFragment: Fragment() {
 
         navController = findNavController()
 
-
-
+        favoriteRecipesList.clear()
         Log.d("!!!FF",viewModel.favoriteList.toString())
         favoriteRecipesList.addAll(viewModel.favoriteList)
 
@@ -66,12 +65,9 @@ class FavoriteFragment: Fragment() {
 
 
     fun changeFavoriteRecipeInFavorite(position: Int){
-            viewModel.updateOutFavorites(position)
+            viewModel.updateOutFavorites(favoriteRecipesList[position].id)
         favoriteRecipesList.remove(favoriteRecipesList[position])
         favoriteRecyclerView.adapter!!.notifyDataSetChanged()
     }
 
-    fun getFavorites(){
-        viewModel.getFavorites()
-    }
 }
