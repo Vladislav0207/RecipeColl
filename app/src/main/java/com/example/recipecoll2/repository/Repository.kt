@@ -46,8 +46,13 @@ class Repository @Inject constructor (
         localModel.updateRecipe(recipeId, isSelected)
     }
 
-    suspend fun getAllIngredients():List<Ingredient>{
-        return localModel.getAllIngredients()
+    suspend fun getAllIngredientsByView(): MutableSet<IngredientView>{
+        val listIngredients = localModel.getAllIngredients()
+        val setIngredientsByView = listIngredients.mapTo(mutableSetOf<IngredientView>()){IngredientView(
+            it.nameClean
+        )
+        }
+        return setIngredientsByView
     }
 
     suspend fun searchByIngredient (listOfNames : MutableList<String>) : MutableList<Recipe>{
@@ -68,6 +73,8 @@ class Repository @Inject constructor (
                     }
                 }
             }
+
+
             if (h == listOfNames.size){
                 resultList.add(recipeList[i])
             }

@@ -12,6 +12,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.recipecoll2.R
 import com.example.recipecoll2.remoteModel.Ingredient
+import com.example.recipecoll2.remoteModel.Recipe
+import com.example.recipecoll2.repository.IngredientView
 import com.example.recipecoll2.viewModel.RecipeViewModel
 import kotlinx.android.synthetic.main.fragment_main.*
 import kotlinx.android.synthetic.main.fragment_main.mainRecyclerView
@@ -22,7 +24,7 @@ class SearchIngredientFragment: Fragment() {
     lateinit var navController: NavController
     lateinit var viewModel: RecipeViewModel
     lateinit var adapter:IngredientAdapter
-    var ingredients= mutableListOf<Ingredient>()
+    var ingredients= mutableListOf<IngredientView>()
 
 
     override fun onCreateView(
@@ -37,46 +39,44 @@ class SearchIngredientFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         navController = findNavController()
-
+        viewModel.getAllIngredientsView()
+        ingredients.addAll(viewModel.ingredientsView.sortedBy { it.name })
         adapter = IngredientAdapter(ingredients, this)
         ingredientRecyclerView.adapter = adapter
         ingredientRecyclerView.layoutManager = LinearLayoutManager(this.context)
-
-        viewModel.getAllIngredients()
-        viewModel.ingredientsLive.observe(activity as MainActivity, Observer {
-            ingredients.clear()
-            ingredients.addAll(it)
-            ingredientRecyclerView.adapter?.notifyDataSetChanged()
-        })
+        ingredientRecyclerView.adapter?.notifyDataSetChanged()
 
 
 
 
         btnResultSearch.setOnClickListener {
             //create list of names
-            val listNameIngredientsSelect : MutableList<String> = ingredients.
-            filter { it.isSelect == 1 }.
+            val listNameIngredientsSelect : MutableList<String> = ingredients.filter { it.isSelect }.
                 mapTo(mutableListOf<String>())
                 {
-                    it.nameClean
+                    it.name
                 }
 
             viewModel.listOfNamesIngredientSelected = listNameIngredientsSelect
 
+            viewModel.searchByIngredient()
+
+
             navController.navigate(R.id.resultSearchFragment)
+
         }
+
+
     }
 
 
 
     fun selectIngredient(position: Int) {
 
-        if (ingredients[position].isSelect == 0) {
-            ingredients[position].isSelect = 1
-        } else {
-            ingredients[position].isSelect = 0
-        }
+        ingredients[position].isSelect = !ingredients[position].isSelect
         adapter.notifyItemChanged(position)
 
     }
+
+
 }

@@ -46,6 +46,7 @@ class MainFragment : Fragment() {
 
 
 
+        viewModel.getAllIngredientsView()
         viewModel.getFavorites()
         viewModel.getData()
         recipes = viewModel.recipeLive.value!!

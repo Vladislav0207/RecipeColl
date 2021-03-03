@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.recipecoll2.remoteModel.Ingredient
 import com.example.recipecoll2.remoteModel.Recipe
+import com.example.recipecoll2.repository.IngredientView
 import com.example.recipecoll2.repository.Repository
 import kotlinx.coroutines.*
 
@@ -12,9 +13,8 @@ class RecipeViewModel (val repository: Repository) : ViewModel() {
 
     var showRecipe : Recipe? = null
 
-    val ingredientsLive : MutableLiveData<MutableSet<Ingredient>> by lazy {
-        MutableLiveData<MutableSet<Ingredient>>()
-    }
+    var ingredientsView = mutableSetOf<IngredientView>()
+
     val scope = CoroutineScope(Dispatchers.IO)
 
 
@@ -24,9 +24,8 @@ class RecipeViewModel (val repository: Repository) : ViewModel() {
         MutableLiveData<MutableList<Recipe>>()
     }
 
-    val recipeResultLive : MutableLiveData<MutableList<Recipe>> by lazy {
-        MutableLiveData<MutableList<Recipe>>()
-    }
+    val recipeResult = mutableListOf<Recipe>()
+
 
     var listOfNamesIngredientSelected = mutableListOf<String>()
 
@@ -58,17 +57,19 @@ class RecipeViewModel (val repository: Repository) : ViewModel() {
         }
     }
 
-    fun getAllIngredients() {
-        scope.launch {
-            val data = repository.getAllIngredients().toMutableSet()
-            ingredientsLive.postValue(data)
+    fun getAllIngredientsView() {
+        CoroutineScope(Dispatchers.Main).launch {
+            val data = repository.getAllIngredientsByView()
+            ingredientsView = data
         }
     }
 
-    fun searchByIngredient(listOfNames: MutableList<String>){
-        scope.launch {
-            val data = repository.searchByIngredient(listOfNames)
-            recipeResultLive.postValue(data)
+    fun searchByIngredient(){
+        CoroutineScope(Dispatchers.IO).launch {
+            recipeResult.clear()
+            val data = repository.searchByIngredient(listOfNamesIngredientSelected)
+            recipeResult.addAll(data)
+            return@launch
         }
     }
 

@@ -20,11 +20,11 @@ data class Recipe (
 )
 @Entity(tableName = "ingredient")
 data class Ingredient(
-    val id: Int,
-    val image:String,
-    val nameClean: String,
-    val amount: String,
-    val unit: String,
+    var id: Int,
+    var image:String,
+    var nameClean: String,
+    var amount: String,
+    var unit: String,
     var recipe_id: Int,
     @PrimaryKey (autoGenerate = true)
     var key : Int=0,
